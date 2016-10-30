@@ -1,12 +1,260 @@
-﻿<Window x:Class="HockeyScoreboardCentral.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HockeyScoreboardCentral"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        x:Class="HockeyScoreboardCentral.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="Hockey Scoreboard Central" MinHeight="350" MinWidth="700"
+        DataContext="ScoreboardViewModel">
+    
+    <Grid Name="MainLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" 
+                   x:Name="textHomeTeamTitle"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="40"
+                   Text="Heim" />
+
+        <TextBlock Grid.Row="0" Grid.Column="1" 
+                   x:Name="textGameTimeTitle"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" 
+                   FontSize="40"
+                   Text="Spielzeit" />
+
+        <TextBlock Grid.Row="0" Grid.Column="2" 
+                   x:Name="textGuestTeamTitle"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" 
+                   FontSize="40"
+                   Text="Gast" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   x:Name="textGoalHomeTeam"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" 
+                   FontSize="40"
+                   Text="{Binding GoalsHomeTeam}" />
+
+        <DockPanel LastChildFill="False" 
+                   Grid.Row="1" Grid.Column="1">
+
+            <TextBlock DockPanel.Dock="Top"
+                       x:Name="textGameTime"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" 
+                       FontSize="40"
+                       Text="{Binding GameTime}" />
+
+            <DockPanel  LastChildFill="False" 
+                        DockPanel.Dock="Bottom">
+                <TextBlock DockPanel.Dock="Left"
+                       x:Name="textPeriodTitle"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" 
+                       FontSize="40"
+                       Text="Periode: " />
+
+                <TextBlock DockPanel.Dock="Right"
+                       x:Name="textPeriod"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" 
+                       FontSize="40"
+                       Text="{Binding Period}" />
+            </DockPanel>
+        </DockPanel>
+
         
+
+        <TextBlock Grid.Row="1" Grid.Column="2" 
+                   x:Name="textGoalGuestTeam"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" 
+                   FontSize="40"
+                   Text="{Binding GoalsGuestTeam}" />
+
+        <!-- row 2 -->
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.RowSpan="3"
+              Name="PenaltiesHome">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" 
+                       x:Name="textHomePenalyFirstPlayer"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Margin="10,0,0,0"
+                       Text="Spieler" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" 
+                       x:Name="textFirstHomePenalyPlayerTitle"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Margin="10,0,0,0"
+                       Background="Black"
+                       Foreground="White"
+                       Text="{Binding FirstHomePenaltyPlayerNumber}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" 
+                       x:Name="textSecondHomePenalyPlayerTitle"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Background="Black"
+                       Foreground="White"
+                       Margin="10,0,0,0"
+                       Text="{Binding SecondHomePenaltyPlayerNumber}" />
+
+            <TextBlock Grid.Row="0" Grid.Column="1" 
+                       x:Name="textHomePenalyFirstTime"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Margin="10,0,0,0"
+                       Text="Strafe" />
+
+            <TextBlock Grid.Row="1" Grid.Column="1" 
+                       x:Name="textFirstHomePenalyTimeTitle"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Background="Black"
+                       Foreground="White"
+                       Margin="10,0,0,0"
+                       Text="{Binding FirstHomePenaltyTimeRemaining}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="1" 
+                       x:Name="textSecondHomePenalyTimeTitle"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Background="Black"
+                       Foreground="White"
+                       Margin="10,0,0,0"
+                       Text="{Binding SecondHomePenaltyTimeRemaining}" />
+        </Grid>
+
+        <Button x:Name="btnStartStopClock" 
+                Grid.Row="2" Grid.Column="1"
+                Content="Start Clock" 
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" 
+                Margin="15"
+                Click="btnStartStopClock_Click" 
+                FontSize="20" 
+                FontWeight="Bold"/>
+
+        <Grid Grid.Row="2" Grid.Column="2" Grid.RowSpan="3"
+              Name="PenaltiesGuest">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" 
+                       x:Name="textGuestPenalyFirstTime"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Margin="0,0,10,0"
+                       FontWeight="Bold"
+                       Text="Strafe" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" 
+                       x:Name="textFirstGuestPenalyTimeTitle"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Margin="0,0,10,0"
+                       Background="Black"
+                       Foreground="White"
+                       Text="{Binding FirstGuestPenaltyTimeRemaining}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" 
+                       x:Name="textSecondGuestPenalyTimeTitle"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Margin="0,0,10,0"
+                       Background="Black"
+                       Foreground="White"
+                       Text="{Binding SecondGuestPenaltyTimeRemaining}" />
+
+            <TextBlock Grid.Row="0" Grid.Column="1" 
+                       x:Name="textGuestPenalyFirstPlayer"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Margin="10,0,0,0"
+                       Text="Spieler" />
+
+
+            <TextBlock Grid.Row="1" Grid.Column="1" 
+                       x:Name="textFirstGuestPenalyPlayerTitle"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Background="Black"
+                       Foreground="White"
+                       Margin="10,0,0,0"
+                       Text="{Binding FirstGuestPenaltyPlayerNumber}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="1" 
+                       x:Name="textSecondGuestPenalyPlayerTitle"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       FontSize="30"
+                       Background="Black"
+                       Foreground="White"
+                       Margin="10,0,0,0"
+                       Text="{Binding SecondGuestPenaltyPlayerNumber}" />
+        </Grid>
+
+        <!-- row 3 -->
+
+        <Button x:Name="btnAddEvent" 
+                Grid.Row="3" Grid.Column="1"
+                Content="Neues Event" 
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" 
+                Margin="15"
+                FontSize="20" 
+                FontWeight="Bold" Click="btnAddEvent_Click"/>
+
     </Grid>
 </Window>

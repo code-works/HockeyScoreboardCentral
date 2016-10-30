@@ -7,12 +7,12 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("HockeyScoreboardCentral")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Hockey Scoreboard Central")]
+[assembly: AssemblyDescription("Scoreboard application specific for Icehockey games")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HockeyScoreboardCentral")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("Code-Works")]
+[assembly: AssemblyProduct("Hockey Scoreboard Central")]
+[assembly: AssemblyCopyright("Copyright © Code-Works 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,3 +53,5 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: Guid("1B6987E4-327D-47ED-A457-495E7AED8178")]
+
